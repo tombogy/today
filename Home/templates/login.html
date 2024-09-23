@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Body and Background Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, #221a2d, #3b3250); /* Darker background with gradient */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Container Styling - Glassmorphism effect */
+        .container {
+            background: rgba(255, 255, 255, 0.05); /* Semi-transparent */
+            border-radius: 25px;
+            padding: 60px 50px; /* Increased padding for more space */
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); /* Blurred shadow */
+            backdrop-filter: blur(8px); /* Background blur for container */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+        }
+
+        /* User Icon */
+        .user-icon {
+            width: 90px;
+            height: 90px;
+            background-image: url('https://www.w3schools.com/howto/img_avatar.png'); /* Sample user icon */
+            background-size: cover;
+            border-radius: 50%;
+            margin: 0 auto 30px auto;
+        }
+
+        /* Form Title */
+        h2 {
+            color: rgba(255, 255, 255, 0.85); /* Light heading color */
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 25px; /* Spacing between inputs */
+        }
+
+        /* Input Icon */
+        .input-container i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7); /* Icon color */
+        }
+
+       /* Input Styling */
+input, select {
+    width: 100%;
+    padding: 10px 10px 10px 20px; /* Reduce the left padding (was 40px) */
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Subtle underline */
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Input Icon */
+.input-container i {
+    position: absolute;
+    left: 5px; /* Move icon slightly to the left */
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.7); /* Icon color */
+}
+
+        
+
+        input:focus, select:focus {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.7); /* Border on focus */
+        }
+
+        /* User Type Select Dropdown */
+        select {
+            padding-left: 40px; /* Align with other inputs */
+        }
+
+        /* Button Styling */
+        button {
+            padding: 12px;
+            margin-top: 30px;
+            background: linear-gradient(145deg, #e84545, #903749); /* Button gradient */
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background: linear-gradient(145deg, #903749, #e84545); /* Button hover */
+        }
+
+        /* Remember me and Forgot Password Styling */
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .remember-forgot a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+
+        /* Messages for Form */
+        .messages {
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.8); /* Light error message */
+        }
+
+        /* FontAwesome Icon Styling */
+        i {
+            font-size: 18px;
+        }
+
+    </style>
+    <!-- Linking Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- User Icon -->
+        <div class="user-icon"></div>
+
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Email Input with Icon -->
+            <div class="input-container">
+                <i class="fas fa-envelope"></i> <!-- Email Icon -->
+                <input type="text" id="username" name="username" placeholder="Email ID" required>
+            </div>
+
+            <!-- Password Input with Icon -->
+            <div class="input-container">
+                <i class="fas fa-lock"></i> <!-- Password Icon -->
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+
+            <!-- User Type Select Dropdown -->
+            <div class="input-container">
+                <i class="fas fa-user-tag"></i> <!-- User Type Icon -->
+                <select id="usertype" name="usertype" required>
+                    <option value="admin">Admin</option>
+                    <option value="driver">Driver</option>
+                </select>
+            </div>
+
+            <!-- Remember me and Forgot Password -->
+            <div class="remember-forgot">
+                <label><input type="checkbox" name="remember"> Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Error Messages -->
+        <div class="messages">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
